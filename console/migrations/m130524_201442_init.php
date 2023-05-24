@@ -8,22 +8,52 @@ class m130524_201442_init extends Migration
     {
         $tableOptions = null;
         if ($this->db->driverName === 'mysql') {
-            // https://stackoverflow.com/questions/766809/whats-the-difference-between-utf8-general-ci-and-utf8-unicode-ci
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
-
-        $this->createTable('{{%user}}', [
+        $this->createTable('{{%role}}', [
             'id' => $this->primaryKey(),
+            'name' => $this->string()->notNull()->unique(),
+            'created_at' => $this->timestamp()->null()->defaultExpression('CURRENT_TIMESTAMP'),
+            'updated_at' => $this->timestamp()->null(),
+        ], $tableOptions);
+        $this->createTable('{{%user_admin}}', [
+            'id' => $this->primaryKey(),
+            'role_id' => $this->integer(),
+            'faculty_id' => $this->integer(),
             'username' => $this->string()->notNull()->unique(),
             'auth_key' => $this->string(32)->notNull(),
-            'password_hash' => $this->string()->notNull(),
+            'password' => $this->string()->notNull(),
             'password_reset_token' => $this->string()->unique(),
-            'email' => $this->string()->notNull()->unique(),
-
             'status' => $this->smallInteger()->notNull()->defaultValue(10),
-            'created_at' => $this->integer()->notNull(),
-            'updated_at' => $this->integer()->notNull(),
+            'created_at' => $this->timestamp()->null()->defaultExpression('CURRENT_TIMESTAMP'),
+            'updated_at' => $this->timestamp()->null(),
         ], $tableOptions);
+        $this->createTable('{{%user}}', [
+            'id' => $this->primaryKey(),
+            'student_id' => $this->integer(),
+            'username' => $this->string()->notNull()->unique(),
+            'auth_key' => $this->string(32)->notNull(),
+            'password' => $this->string()->notNull(),
+            'password_reset_token' => $this->string()->unique(),
+            'status' => $this->smallInteger()->notNull()->defaultValue(10),
+            'created_at' => $this->timestamp()->null()->defaultExpression('CURRENT_TIMESTAMP'),
+            'updated_at' => $this->timestamp()->null(),
+        ], $tableOptions);
+        $this->createIndex(
+            'idx-user_admin-role_id',
+            'user_admin',
+            'role_id'
+        );
+
+        // add foreign key for table `user`
+        $this->addForeignKey(
+            'fk-user_admin-role_id',
+            'user_admin',
+            'role_id',
+            'role',
+            'id',
+            'CASCADE'
+        );
     }
 
     public function down()

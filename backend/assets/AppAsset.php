@@ -19,10 +19,10 @@ class AppAsset extends AssetBundle
     ];
     public $js = [
         "/vendors/js/vendor.bundle.base.js",
-        "/js/off-canvas.js",
-        "/js/hoverable-collapse.js",
-        "/js/misc.js",
-        "/js/dashboard.js",
+//        "/js/off-canvas.js",
+//        "/js/hoverable-collapse.js",
+//        "/js/misc.js",
+//        "/js/dashboard.js",
     ];
     public $depends = [
         'yii\web\YiiAsset',
