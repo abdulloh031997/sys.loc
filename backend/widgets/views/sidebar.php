@@ -6,97 +6,103 @@ use yii\helpers\Html;
 $url = Yii::getAlias("@fronted_domain");
 $user = Yii::$app->user->identity;
 ?>
-<nav class="sidebar sidebar-offcanvas" id="sidebar">
-    <ul class="nav">
-        <li class="nav-item nav-profile">
-            <a href="#" class="nav-link">
-                <div class="nav-profile-image">
-                    <img src="/images/faces/face1.jpg" alt="profile">
-                    <span class="login-status online"></span>
-                    <!--change to offline or busy as needed-->
-                </div>
-                <div class="nav-profile-text d-flex flex-column">
-                    <span class="font-weight-bold mb-2">Bobojonov A</span>
-                    <span class="text-secondary text-small">Project Manager</span>
-                </div>
-                <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
+<aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+    <div class="app-brand demo">
+        <a href="/" class="app-brand-link">
+              <span class="app-brand-logo demo">
+              </span>
+            <span class="app-brand-text demo menu-text fw-bolder ms-2"><img src="/img/favicon/logo.svg" alt=""></span>
+        </a>
+        <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+            <i class="bx bx-chevron-left bx-sm align-middle"></i>
+        </a>
+    </div>
+
+    <div class="menu-inner-shadow"></div>
+
+    <ul class="menu-inner py-1">
+        <li class="menu-item <?= Yii::$app->request->url == '/' ? 'active' : '' ?>">
+            <a href="/" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <div data-i18n="Analytics">Bosh sahifa</div>
             </a>
         </li>
-        <li class="nav-item active">
-            <a class="nav-link" href="/">
-                <span class="menu-title">Bosh sahifa</span>
-                <i class="mdi mdi-home menu-icon"></i>
+        <li class="menu-item <?= (Yii::$app->request->url == '/role' || Yii::$app->request->url == '/role/index' || Yii::$app->request->url == '/user-add') ? 'active open' : '' ?>">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                <div data-i18n="Account Settings">Foydalanuvchi</div>
             </a>
+            <ul class="menu-sub">
+                <li class="menu-item <?= (Yii::$app->request->url == '/user-admin') ? 'active' : '' ?>">
+                    <a href="<?= Url::to(['/user-add']) ?>" class="menu-link">
+                        <div data-i18n="Notifications">Foydalanuvchilar</div>
+                    </a>
+                </li>
+            </ul>
         </li>
-        <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-                <span class="menu-title">Foydalanuvchilar</span>
-                <i class="menu-arrow"></i>
-                <i class="mdi mdi-crosshairs-gps menu-icon"></i>
+        <li class="menu-item <?= (Yii::$app->request->url == '/special' || Yii::$app->request->url == '/edu-lang' || Yii::$app->request->url == '/emode' || Yii::$app->request->url == '/department' || Yii::$app->request->url == '/group' || Yii::$app->request->url == '/student') ? 'active open' : '' ?>">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                <div data-i18n="Account Settings">Talabalar</div>
             </a>
-            <div class="collapse" id="ui-basic" style="">
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="/user-admin/">Foydalanuvchi</a></li>
-                </ul>
-            </div>
+            <ul class="menu-sub">
+
+                <li class="menu-item <?= (Yii::$app->request->url == '/edu-lang') ? 'active' : '' ?>">
+                    <a href="<?= Url::to(['/edu-lang']) ?>" class="menu-link">
+                        <div data-i18n="Notifications">Ta'lim tili</div>
+                    </a>
+                </li>
+                <li class="menu-item <?= (Yii::$app->request->url == '/emode') ? 'active' : '' ?>">
+                    <a href="<?= Url::to(['/emode']) ?>" class="menu-link">
+                        <div data-i18n="Notifications">Ta'lim shakli</div>
+                    </a>
+                </li>
+                <li class="menu-item <?= (Yii::$app->request->url == '/department') ? 'active' : '' ?>">
+                    <a href="<?= Url::to(['/department']) ?>" class="menu-link">
+                        <div data-i18n="Notifications">Fakultet</div>
+                    </a>
+                </li>
+                <li class="menu-item <?= (Yii::$app->request->url == '/special') ? 'active' : '' ?>">
+                    <a href="<?= Url::to(['/special']) ?>" class="menu-link">
+                        <div data-i18n="Notifications">Kanfedralar</div>
+                    </a>
+                </li>
+                <li class="menu-item <?= (Yii::$app->request->url == '/group') ? 'active' : '' ?>">
+                    <a href="<?= Url::to(['/group']) ?>" class="menu-link">
+                        <div data-i18n="Notifications">Gruhlar</div>
+                    </a>
+                </li>
+                <li class="menu-item <?= (Yii::$app->request->url == '/student') ? 'active' : '' ?>">
+                    <a href="<?= Url::to(['/student']) ?>" class="menu-link">
+                        <div data-i18n="Notifications">Talabalar</div>
+                    </a>
+                </li>
+            </ul>
         </li>
-        <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-toggle="collapse" href="#ui-talaba" aria-expanded="false" aria-controls="ui-basic">
-                <span class="menu-title">Talaba</span>
-                <i class="menu-arrow"></i>
-                <i class="mdi mdi-contacts menu-icon"></i>
+        <li class="menu-item <?= (Yii::$app->request->url == '/subject' || Yii::$app->request->url == '/exam' || Yii::$app->request->url == '/qlist') ? 'active open' : '' ?>">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                <div data-i18n="Account Settings">Imtihon</div>
             </a>
-            <div class="collapse" id="ui-talaba" style="">
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="/emode/">Ta'lim shakli</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="/edu-lang/">Ta'lim tili</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="/departament/">Kanfedralar</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="/faculty/">Fakultetlar</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="/student/">Talabalar</a></li>
-                </ul>
-            </div>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/subject">
-                <span class="menu-title">Fanlar</span>
-                <i class="mdi mdi-crosshairs-gps menu-icon"></i>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/qlist">
-                <span class="menu-title">Savollar</span>
-                <i class="mdi mdi-format-list-bulleted menu-icon"></i>
-            </a>
+            <ul class="menu-sub">
+
+                <li class="menu-item <?= (Yii::$app->request->url == '/subject') ? 'active' : '' ?>">
+                    <a href="<?= Url::to(['/subject']) ?>" class="menu-link">
+                        <div data-i18n="Notifications">Fanlar</div>
+                    </a>
+                </li>
+                <li class="menu-item <?= (Yii::$app->request->url == '/exam') ? 'active' : '' ?>">
+                    <a href="<?= Url::to(['/exam']) ?>" class="menu-link">
+                        <div data-i18n="Notifications">Imtihonlar</div>
+                    </a>
+                </li>
+                <li class="menu-item <?= (Yii::$app->request->url == '/qlist') ? 'active' : '' ?>">
+                    <a href="<?= Url::to(['/qlist']) ?>" class="menu-link">
+                        <div data-i18n="Notifications">Savollar</div>
+                    </a>
+                </li>
+            </ul>
         </li>
 
-        <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
-                <span class="menu-title">Imtihon</span>
-                <i class="menu-arrow"></i>
-                <i class="mdi mdi-medical-bag menu-icon"></i>
-            </a>
-            <div class="collapse" id="general-pages" style="">
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="/exam"> Imtihon</a></li>
-                </ul>
-            </div>
-        </li>
-<!--        <li class="nav-item sidebar-actions">-->
-<!--              <span class="nav-link">-->
-<!--                <div class="border-bottom">-->
-<!--                  <h6 class="font-weight-normal mb-3">Projects</h6>-->
-<!--                </div>-->
-<!--                <button class="btn btn-block btn-lg btn-gradient-primary mt-4">+ Add a project</button>-->
-<!--                <div class="mt-4">-->
-<!--                  <div class="border-bottom">-->
-<!--                    <p class="text-secondary">Categories</p>-->
-<!--                  </div>-->
-<!--                  <ul class="gradient-bullet-list mt-4">-->
-<!--                    <li>Free</li>-->
-<!--                    <li>Pro</li>-->
-<!--                  </ul>-->
-<!--                </div>-->
-<!--              </span>-->
-<!--        </li>-->
     </ul>
-</nav>
+</aside>

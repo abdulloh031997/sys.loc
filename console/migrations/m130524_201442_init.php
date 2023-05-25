@@ -16,6 +16,7 @@ class m130524_201442_init extends Migration
             'created_at' => $this->timestamp()->null()->defaultExpression('CURRENT_TIMESTAMP'),
             'updated_at' => $this->timestamp()->null(),
         ], $tableOptions);
+
         $this->createTable('{{%user_admin}}', [
             'id' => $this->primaryKey(),
             'role_id' => $this->integer(),
@@ -28,6 +29,7 @@ class m130524_201442_init extends Migration
             'created_at' => $this->timestamp()->null()->defaultExpression('CURRENT_TIMESTAMP'),
             'updated_at' => $this->timestamp()->null(),
         ], $tableOptions);
+
         $this->createTable('{{%user}}', [
             'id' => $this->primaryKey(),
             'student_id' => $this->integer(),
@@ -44,8 +46,6 @@ class m130524_201442_init extends Migration
             'user_admin',
             'role_id'
         );
-
-        // add foreign key for table `user`
         $this->addForeignKey(
             'fk-user_admin-role_id',
             'user_admin',

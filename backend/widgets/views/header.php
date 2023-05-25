@@ -7,64 +7,66 @@ use common\models\Menu;
 $url = Yii::getAlias("@fronted_domain");
 
 ?>
-<nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 d-flex flex-row fixed-top">
-    <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo" href="/"><img src="/images/logo.svg" alt="logo"></a>
-        <a class="navbar-brand brand-logo-mini" href="/"><img src="/images/logo-mini.svg" alt="logo"></a>
+<nav
+        class="layout-navbar container-fluid navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+        id="layout-navbar"
+>
+    <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+        <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+            <i class="bx bx-menu bx-sm"></i>
+        </a>
     </div>
-    <div class="navbar-menu-wrapper d-flex align-items-stretch">
-        <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
-            <span class="mdi mdi-menu"></span>
-        </button>
-        <div class="search-field d-none d-md-block">
-            <form class="d-flex align-items-center h-100" action="#">
-                <div class="input-group">
-                    <div class="input-group-prepend bg-transparent">
-                        <i class="input-group-text border-0 mdi mdi-magnify"></i>
-                    </div>
-                    <input type="text" class="form-control bg-transparent border-0" placeholder="Search projects">
-                </div>
-            </form>
+
+    <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+        <!-- Search -->
+        <div class="navbar-nav align-items-center">
+            <div class="nav-item d-flex align-items-start">
+
+            </div>
         </div>
-        <ul class="navbar-nav navbar-nav-right">
-            <li class="nav-item nav-profile dropdown">
-                <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                    <div class="nav-profile-img">
-                        <img src="/images/faces/face1.jpg" alt="image">
-                        <span class="availability-status online"></span>
-                    </div>
-                    <div class="nav-profile-text">
-                        <p class="mb-1 text-black">David Greymaax</p>
-                    </div>
-                </a>
-                <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
-                    <a class="dropdown-item" href="#">
-                        <i class="mdi mdi-cached me-2 text-success"></i> Activity Log </a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">
-                        <i class="mdi mdi-logout me-2 text-primary"></i> Signout </a>
-                </div>
-            </li>
-            <li class="nav-item d-none d-lg-block full-screen-link">
-                <a class="nav-link">
-                    <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
-                </a>
+        <!-- /Search -->
+
+        <ul class="navbar-nav flex-row align-items-center ms-auto">
+            <li class="nav-item lh-1 me-3">
+                <a
+                        class="github-button"
+                        href="#"
+                ><?=Yii::$app->user->identity->username?></a
+                >
             </li>
 
-
-            <li class="nav-item nav-logout d-none d-lg-block">
-                <a class="nav-link" href="#">
-                    <i class="mdi mdi-power"></i>
+            <!-- User -->
+            <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+                    <div class="avatar avatar-online">
+                        <img src="/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                    </div>
                 </a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li>
+                        <a class="dropdown-item" href="#">
+                            <div class="d-flex">
+                                <div class="flex-shrink-0 me-3">
+                                    <div class="avatar avatar-online">
+                                        <img src="/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <span class="fw-semibold d-block"><?=Yii::$app->user->identity->username.' '.Yii::$app->user->identity->username?></span>
+                                    <small class="text-muted"><?=Yii::$app->user->identity->username?></small>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <div class="dropdown-divider"></div>
+                    </li>
+                    <li>
+                        <?= Html::a('<i class="bx bx-power-off me-2"></i>'.'<span class="align-middle">'.Yii::t("app","Logout").'</span>', ['/site/logout'],['class' => 'dropdown-item', 'data' => ['method' => 'post']]) ?>
+                    </li>
+                </ul>
             </li>
-            <li class="nav-item nav-settings d-none d-lg-block">
-                <a class="nav-link" href="#">
-                    <i class="mdi mdi-format-line-spacing"></i>
-                </a>
-            </li>
+            <!--/ User -->
         </ul>
-        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
-            <span class="mdi mdi-menu"></span>
-        </button>
     </div>
 </nav>
