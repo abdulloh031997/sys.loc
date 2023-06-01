@@ -44,4 +44,11 @@ class Emode extends \yii\db\ActiveRecord
             'created_at' => 'Created At',
         ];
     }
+    public static function dDEmodeList(){
+        $select = 'name'.lang().' as name_uz,id';
+        return self::find()->select($select)
+            ->orderBy('id')
+            ->indexBy('id')->column();
+
+    }
 }

@@ -1,6 +1,7 @@
 <?php
 
 /** @var \yii\web\View $this */
+
 /** @var string $content */
 
 use common\widgets\Alert;
@@ -13,72 +14,42 @@ use yii\bootstrap5\NavBar;
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
-<!DOCTYPE html>
-<html lang="<?= Yii::$app->language ?>" class="h-100">
-<head>
-    <meta charset="<?= Yii::$app->charset ?>">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <?php $this->registerCsrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
-    <?php $this->head() ?>
-</head>
-<body class="d-flex flex-column h-100">
-<?php $this->beginBody() ?>
-
-<header>
+    <!DOCTYPE html>
+    <html lang="<?= Yii::$app->language ?>" class="h-100">
+    <head>
+        <meta charset="<?= Yii::$app->charset ?>">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+        <meta name="description" content="ALFRAGANUS UNIVERSITY - Nodavlat oliy ta'lim muassasasi">
+        <meta name="keywords" content="ALFRAGANUS universiteti - Nodavlat oliy ta'lim muassasasi">
+        <meta name="author" content="ALFRAGANUS UNIVERSITY - Nodavlat oliy ta'lim muassasasi">
+        <meta name="title" content="ALFRAGANUS UNIVERSITY - Nodavlat oliy ta'lim muassasasi" />
+        <link rel="icon" href="/favicon.ico" sizes="32x32" />
+        <?php $this->registerCsrfMetaTags() ?>
+        <title><?= Html::encode($this->title) ?></title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <?php $this->head() ?>
+    </head>
+    <body class="h-100">
+    <?php $this->beginBody() ?>
+    <?= \frontend\widgets\HeaderWidget::widget() ?>
     <?php
-    NavBar::begin([
-        'brandLabel' => Yii::$app->name,
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar navbar-expand-md navbar-dark bg-dark fixed-top',
-        ],
-    ]);
-    $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => 'About', 'url' => ['/site/about']],
-        ['label' => 'Contact', 'url' => ['/site/contact']],
-    ];
-    if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
-    }
-
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav me-auto mb-2 mb-md-0'],
-        'items' => $menuItems,
-    ]);
-    if (Yii::$app->user->isGuest) {
-        echo Html::tag('div',Html::a('Login',['/site/login'],['class' => ['btn btn-link login text-decoration-none']]),['class' => ['d-flex']]);
-    } else {
-        echo Html::beginForm(['/site/logout'], 'post', ['class' => 'd-flex'])
-            . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
-                ['class' => 'btn btn-link logout text-decoration-none']
-            )
-            . Html::endForm();
-    }
-    NavBar::end();
-    ?>
-</header>
-
-<main role="main" class="flex-shrink-0">
-    <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= Alert::widget() ?>
+    $flash = Yii::$app->session->getAllFlashes();
+    if (!empty($flash)):
+        foreach ($flash as $type => $message) :
+            $js = <<< JS
+                                 Toastify({text: "{$message}",node: "{$type}"}).showToast();
+                                 JS;
+            $this->registerJs($js, \yii\web\View::POS_LOAD);
+        endforeach;
+    endif; ?>
+    <main class="container">
         <?= $content ?>
-    </div>
-</main>
-
-<footer class="footer mt-auto py-3 text-muted">
-    <div class="container">
-        <p class="float-start">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
-        <p class="float-end"><?= Yii::powered() ?></p>
-    </div>
-</footer>
-
-<?php $this->endBody() ?>
-</body>
-</html>
+    </main>
+    <?= \frontend\widgets\FooterWidget::widget() ?>
+    <?php $this->endBody() ?>
+    </body>
+    </html>
 <?php $this->endPage();

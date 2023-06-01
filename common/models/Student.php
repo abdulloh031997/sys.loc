@@ -78,4 +78,8 @@ class Student extends \yii\db\ActiveRecord
             'group_id' => 'Group ID',
         ];
     }
+    public function getShartnoma()
+    {
+        return $this->hasOne(Shartnoma::class, ['student_id' => 'id']);
+    }
 }

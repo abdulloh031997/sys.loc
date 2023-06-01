@@ -1,103 +1,73 @@
-main > .container, main > .container-fluid
-{
-    padding: 70px 15px 20px;
+body{
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(18px);
+}
+#NavBar{
+    background-color: rgba(255, 255, 255, 0.8) !important;
+}
+.card{
+    border-radius: 0px !important;
+}
+.RegistrationRightCard {
+    width: 100%;
+    height: auto;
+    margin: 100px 0px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.footer {
-    background-color: #f5f5f5;
-    font-size: .9em;
-    height: 60px;
+.lock {
+    text-align: right;
+    width: 100%;
+    height: auto;
 }
 
-.footer > .container, .footer > .container-fluid {
-    padding-right: 15px;
-    padding-left: 15px;
+.lock img {
+    text-align:end;
+    width: 500px;
 }
-
-.not-set {
-    color: #c55;
-    font-style: italic;
+#MainContent{
+    width: 100%;
+    height: 650px;
+    justify-content: center;
+    align-items: center;
 }
-
-/* add sorting icons to gridview sort links */
-a.asc:after, a.desc:after {
-    content: '';
-    left: 3px;
-    display: inline-block;
-    width: 0;
-    height: 0;
-    border: solid 5px transparent;
-    margin: 4px 4px 2px 4px;
-    background: transparent;
+.text-gradient{
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+    z-index: 1;
+    background-image: linear-gradient(310deg, #2152FF, #21D4FD);
 }
-
-a.asc:after {
-    border-bottom: solid 7px #212529;
-    border-top-width: 0;
+.swal2-body{
+    background:red;
 }
-
-a.desc:after {
-    border-top: solid 7px #212529;
-    border-bottom-width: 0;
+.PersonImage{
+    width: 100%;
+    height:200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-
-.grid-view th,
-.grid-view td:last-child {
-    white-space: nowrap;
+.PersonImage .image{
+    width:3cm;
+    height:4cm;
 }
-
-.grid-view .filters input,
-.grid-view .filters select {
-    min-width: 50px;
+img{
+    overflow: hidden;
 }
-
-.hint-block {
-    display: block;
-    margin-top: 5px;
-    color: #999;
-}
-
-.error-summary {
-    color: #a94442;
-    background: #fdf7f7;
-    border-left: 3px solid #eed3d7;
-    padding: 10px 20px;
-    margin: 0 0 15px 0;
-}
-
-/* align the logout "link" (button in form) of the navbar */
-.navbar form > button.logout {
-    padding-top: 7px;
-    color: rgba(255, 255, 255, 0.5);
-}
-
-@media(max-width:767px) {
-    .navbar form > button.logout {
-        display:block;
-        text-align: left;
-        width: 100%;
-        padding: 10px 0;
+@media (max-width:920px) {
+    #MainContent{
+        width:initial !important;
+        margin-top: 50px !important;
     }
-}
-
-.navbar form > button.logout:focus,
-.navbar form > button.logout:hover {
-    text-decoration: none;
-    color: rgba(255, 255, 255, 0.75);
-}
-
-.navbar form > button.logout:focus {
-    outline: none;
-}
-
-/* style breadcrumb widget as in previous bootstrap versions */
-.breadcrumb {
-    background-color: var(--bs-gray-200);
-    border-radius: .25rem;
-    padding: .75rem 1rem;
-}
-
-.breadcrumb-item > a
-{
-    text-decoration: none;
+    .row{
+        --mdb-gutter-x: 0 !important;
+    }
+    .lock img {
+        text-align:center;
+        width: 100%;
+    }
 }
